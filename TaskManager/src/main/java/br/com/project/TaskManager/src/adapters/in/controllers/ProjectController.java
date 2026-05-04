@@ -1,7 +1,7 @@
 package br.com.project.TaskManager.src.adapters.in.controllers;
 
 import br.com.project.TaskManager.src.DTO.ProjectDTO;
-gimport br.com.project.TaskManager.src.entities.Project;
+import br.com.project.TaskManager.src.entities.Project;
 import br.com.project.TaskManager.src.services.usecases.project.CreateProjectService;
 import br.com.project.TaskManager.src.services.usecases.project.DeleteProjectService;
 import br.com.project.TaskManager.src.services.usecases.project.FindProjectService;
