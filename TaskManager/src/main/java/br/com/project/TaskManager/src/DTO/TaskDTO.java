@@ -1,4 +1,6 @@
 package br.com.project.TaskManager.src.DTO;
 
-public record TaskDTO(String title, String description) {
+import java.util.UUID;
+
+public record TaskDTO(String title, String description, UUID projectID) {
 }
