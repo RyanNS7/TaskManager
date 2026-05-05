@@ -1,5 +1,4 @@
 package br.com.project.TaskManager.src.services.usecases.task;
-
 import br.com.project.TaskManager.src.entities.Task;
 import br.com.project.TaskManager.src.exceptions.InsufficientCharactersException;
 import br.com.project.TaskManager.src.exceptions.NotFoundException;
