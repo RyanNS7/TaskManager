@@ -1,6 +1,5 @@
 package br.com.project.TaskManager.src.services.usecases.task;
 
-import br.com.project.TaskManager.src.DTO.TaskDTO;
 import br.com.project.TaskManager.src.entities.Task;
 import br.com.project.TaskManager.src.exceptions.InsufficientCharactersException;
 import br.com.project.TaskManager.src.exceptions.NotFoundException;
@@ -21,15 +20,15 @@ public class CreateTaskService {
         this.projectRepo = projectRepo;
     }
 
-    public Task create(TaskDTO task, UUID project_id){
-        if(projectRepo.findProjectByID(project_id) == null){
+    public Task create(Task task, UUID projectId){
+        if(projectRepo.findProjectByID(projectId) == null){
             throw new NotFoundException("Error, Project not found");
         }
 
-        if(task.title().length() < 3){
+        if(task.getTitle().length() < 3){
             throw new InsufficientCharactersException("Insufficient number of characters");
         }
 
-        return taskRepo.createTask(task, project_id);
+        return taskRepo.createTask(task, projectId);
     }
 }

@@ -14,7 +14,7 @@ public class DeleteTaskService {
         this.taskRepo = taskRepo;
     }
 
-    public Boolean delete(UUID task_id){
-        return taskRepo.deleteTask(task_id);
+    public Boolean delete(UUID taskId){
+        return taskRepo.deleteTask(taskId);
     }
 }
