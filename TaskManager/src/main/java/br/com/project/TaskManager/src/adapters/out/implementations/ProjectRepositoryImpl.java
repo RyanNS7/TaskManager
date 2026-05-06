@@ -1,7 +1,7 @@
 package br.com.project.TaskManager.src.adapters.out.implementations;
 
 import br.com.project.TaskManager.src.entities.Project;
-import br.com.project.TaskManager.src.exceptions.DatabaseErrorException;
+import br.com.project.TaskManager.src.exceptions.InternalServerError;
 import br.com.project.TaskManager.src.exceptions.NotFoundException;
 import br.com.project.TaskManager.src.infra.models.ProjectModel;
 import br.com.project.TaskManager.src.infra.repositories.ProjectRepositoriesDB;
@@ -35,7 +35,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
             return projectCreated;
 
         } catch (Exception e) {
-            throw new DatabaseErrorException(e.getMessage());
+            throw new InternalServerError(e.getMessage());
         }
     }
 
@@ -53,7 +53,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
         } catch (NotFoundException e) {
             throw e;
         }catch (Exception e){
-            throw new DatabaseErrorException("Error while trying to delete the project.");
+            throw new InternalServerError("Error while trying to delete the project.");
         }
     }
 
