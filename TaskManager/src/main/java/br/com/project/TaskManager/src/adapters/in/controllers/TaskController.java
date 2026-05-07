@@ -1,10 +1,12 @@
 package br.com.project.TaskManager.src.adapters.in.controllers;
 
 import br.com.project.TaskManager.src.DTO.TaskDTO;
+import br.com.project.TaskManager.src.DTO.UpdateTaskDTO;
 import br.com.project.TaskManager.src.entities.Task;
 import br.com.project.TaskManager.src.services.usecases.task.CreateTaskService;
 import br.com.project.TaskManager.src.services.usecases.task.DeleteTaskService;
 import br.com.project.TaskManager.src.services.usecases.task.FindTaskService;
+import br.com.project.TaskManager.src.services.usecases.task.UpdateTaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +19,13 @@ public class TaskController {
     private final CreateTaskService createTaskService;
     private final FindTaskService findTaskService;
     private final DeleteTaskService deleteTaskService;
+    private final UpdateTaskService updateTaskService;
 
-    public TaskController(CreateTaskService createTaskService, FindTaskService findTaskService, DeleteTaskService deleteTaskService) {
+    public TaskController(CreateTaskService createTaskService, FindTaskService findTaskService, DeleteTaskService deleteTaskService, UpdateTaskService updateTaskService) {
         this.createTaskService = createTaskService;
         this.findTaskService = findTaskService;
         this.deleteTaskService = deleteTaskService;
+        this.updateTaskService = updateTaskService;
     }
 
     @PostMapping
@@ -49,6 +53,19 @@ public class TaskController {
         deleteTaskService.delete(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/update")
+    ResponseEntity<Task> updateTask(@RequestBody UpdateTaskDTO updateTaskDTO){
+        Task task = new Task();
+        task.setTask_id(updateTaskDTO.idTask());
+        task.setStatus(updateTaskDTO.status());
+        task.setDescription(updateTaskDTO.description());
+        task.setTitle(updateTaskDTO.title());
+
+        Task updated = updateTaskService.update(task);
+
+        return ResponseEntity.ok(updated);
     }
 
 }
