@@ -12,5 +12,6 @@ public interface TaskRepository {
     Task createTask(Task task, UUID projectId);
     Boolean deleteTask(UUID idTask);
     Task findTask(UUID idTask);
+    Task updateTask(Task task);
 
 }
