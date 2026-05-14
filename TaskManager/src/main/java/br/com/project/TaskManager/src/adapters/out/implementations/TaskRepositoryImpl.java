@@ -59,14 +59,44 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public Task findTask(UUID idTask) {
-        TaskModel taskFinded = taskRepositoriesDB.findById(idTask).orElseThrow(() -> new NotFoundException("Task Not Found"));
+        TaskModel taskFound = taskRepositoriesDB.findById(idTask).orElseThrow(() -> new NotFoundException("Task Not Found"));
 
         Task task = new Task();
-        task.setTask_id(taskFinded.getId());
-        task.setDescription(taskFinded.getDescription());
-        task.setStatus(taskFinded.getStatus());
-        task.setTitle(taskFinded.getTitle());
+        task.setTask_id(taskFound.getId());
+        task.setDescription(taskFound.getDescription());
+        task.setStatus(taskFound.getStatus());
+        task.setTitle(taskFound.getTitle());
 
         return task;
+    }
+
+    @Override
+    public Task updateTask(Task task) {
+
+        TaskModel existingTask = taskRepositoriesDB.findById(task.getTask_id()).orElseThrow(() -> new NotFoundException("Task Not Found"));
+
+        if(task.getTitle() != null){
+            existingTask.setTitle(task.getTitle());
+        }
+
+        if(task.getDescription() != null){
+            existingTask.setDescription(task.getDescription());
+        }
+
+        if(task.getStatus() != null){
+            existingTask.setStatus(task.getStatus());
+        }
+
+        TaskModel savedTask = taskRepositoriesDB.save(existingTask);
+
+        System.out.println(savedTask.getStatus());
+
+        Task updated = new Task();
+        updated.setTask_id(savedTask.getId());
+        updated.setDescription(savedTask.getDescription());
+        updated.setStatus(savedTask.getStatus());
+        updated.setTitle(savedTask.getTitle());
+
+        return updated;
     }
 }
