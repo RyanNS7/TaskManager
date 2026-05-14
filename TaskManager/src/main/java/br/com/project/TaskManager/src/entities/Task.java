@@ -10,6 +10,8 @@ public class Task {
     private String title;
     private String description;
     private Status status;
+    private UUID assignedUserId;
+    private UUID projectID;
 
     public UUID getTask_id() {
         return task_id;
@@ -41,5 +43,21 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public UUID getAssignedUserId() {
+        return assignedUserId;
+    }
+
+    public void setAssignedUserId(UUID assignedUserId) {
+        this.assignedUserId = assignedUserId;
+    }
+
+    public UUID getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(UUID projectID) {
+        this.projectID = projectID;
     }
 }
